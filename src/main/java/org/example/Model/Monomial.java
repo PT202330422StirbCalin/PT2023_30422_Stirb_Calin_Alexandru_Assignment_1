@@ -4,6 +4,13 @@ public class Monomial {
     private double coef;
     private int degree;
 
+    public Monomial(double coef, int degree) {
+        this.coef = coef;
+        this.degree = degree;
+    }
+    public Monomial(){
+
+    }
 
     public double getCoef() {
         return coef;
