@@ -5,7 +5,6 @@ public class Monomial {
     private int degree;
 
 
-
     public double getCoef() {
         return coef;
     }
