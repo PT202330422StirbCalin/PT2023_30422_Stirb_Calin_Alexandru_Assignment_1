@@ -8,6 +8,17 @@ import java.util.Map;
 
 public class Operations {
 
+    public Polynomial buildPolynomial(String text){
+        Operations op = new Operations();
+        Polynomial aux = new Polynomial();
+        String[] mono = op.splitToMonomials(text);
+        for (String it : mono) {
+            Monomial monomial = op.extractData(it);
+            aux.addMonomial(monomial);
+        }
+        return aux;
+    }
+
     public String[] splitToMonomials(String inString) {
         String aux = inString.replaceAll("\\s+", "");                   // remove all " " (white spaces)
         String[] outString = aux.split("((?=[+-]))");                             // split before the characters "+" and "-"

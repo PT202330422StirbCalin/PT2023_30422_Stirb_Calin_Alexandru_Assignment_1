@@ -28,23 +28,11 @@ public class Controller implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == gui.calculateButton) {
-            Polynomial aux = new Polynomial();
             String text = gui.poly1.getText();
-            String[] mono = op.splitToMonomials(text);
-            for (String it : mono) {
-                Monomial monomial = op.extractData(it);
-                aux.addMonomial(monomial);
-            }
-            polynomial1 = aux;                      // extracts the first polynomial from the text field
+            polynomial1 = op.buildPolynomial(text);                      // extracts the first polynomial from the text field
 
-            Polynomial aux2 = new Polynomial();
             String text2 = gui.poly2.getText();
-            String[] mono2 = op.splitToMonomials(text2);
-            for (String it : mono2) {
-                Monomial monomial = op.extractData(it);
-                aux2.addMonomial(monomial);
-            }
-            polynomial2 = aux2;                    // extracts the second polynomial from the text field
+            polynomial2 = op.buildPolynomial(text2);                    // extracts the second polynomial from the text field
 
             if (gui.operations.getSelectedItem() == "Add") {
                 Polynomial add = op.add(polynomial1, polynomial2);
