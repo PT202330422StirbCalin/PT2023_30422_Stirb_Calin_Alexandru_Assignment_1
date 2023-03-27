@@ -63,7 +63,7 @@ public class View {
         panel.add(calculateButton);
 
         result = new JLabel("Result:");
-        result.setBounds(10, 180, 250, 25);
+        result.setBounds(10, 180, 350, 50);
         panel.add(result);
 
         //panel.add(back);
