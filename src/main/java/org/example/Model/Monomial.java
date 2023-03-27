@@ -8,7 +8,8 @@ public class Monomial {
         this.coef = coef;
         this.degree = degree;
     }
-    public Monomial(){
+
+    public Monomial() {
 
     }
 

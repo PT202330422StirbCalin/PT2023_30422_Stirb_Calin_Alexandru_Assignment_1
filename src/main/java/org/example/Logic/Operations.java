@@ -9,18 +9,18 @@ import java.util.Map;
 public class Operations {
 
     public String[] splitToMonomials(String inString) {
-        String aux = inString.replaceAll("\\s+", "");
-        String[] outString = aux.split("((?=[+-]))");
+        String aux = inString.replaceAll("\\s+", "");                   // remove all " " (white spaces)
+        String[] outString = aux.split("((?=[+-]))");                             // split before the characters "+" and "-"
         return outString;
     }
 
     public static String splitToCoef(String inString) {
-        String[] outString = inString.split("[xX]");
+        String[] outString = inString.split("[xX]");                            // split when "X" or "x" are found
         return outString[0];
     }
 
     public static String splitToDegree(String inString) {
-        String[] outString = inString.split("[xX]");
+        String[] outString = inString.split("[xX]");                            // split when "X" or "x" are found
         return outString[1];
     }
 
@@ -28,19 +28,19 @@ public class Operations {
         Monomial monomial = new Monomial();
         String degree;
         String coef;
-        if (inString.matches("[+-]\\d.*"))
+        if (inString.matches("[+-]\\d.*"))                                    //split if after + or - comes a number
             coef = splitToCoef(inString);
-        else if (inString.matches("\\d.*"))
+        else if (inString.matches("\\d.*"))                                   //split at a number
             coef = splitToCoef(inString);
-        else if (inString.matches("-.*"))
+        else if (inString.matches("-.*"))                                     //split if - is found
             coef = "-1";
         else
             coef = "1";
 
-        if (inString.matches(".*[\"^\"].*")) {
+        if (inString.matches(".*[\"^\"].*")) {                               //split if character '^' is found
             degree = splitToDegree(inString);
-            degree = degree.replaceAll("[\"^\"\\s+]", "");
-        } else if (inString.matches(".*[Xx].*"))
+            degree = degree.replaceAll("[\"^\"\\s+]", "");        //remove all spaces
+        } else if (inString.matches(".*[Xx].*"))                            //check if X or x found
             degree = "1";
         else
             degree = "0";
@@ -53,17 +53,17 @@ public class Operations {
 
     public Polynomial add(Polynomial p, Polynomial q) {
         HashMap<Integer, Monomial> mapP = new HashMap<>();
-        mapP.putAll(p.getMonomials());
+        mapP.putAll(p.getMonomials());                          // creates a copy of polynomial p's map
         HashMap<Integer, Monomial> mapQ = (HashMap<Integer, Monomial>) q.getMonomials();
-        Polynomial rez = new Polynomial(mapP);
+        Polynomial rez = new Polynomial(mapP);                  // creates a new polynomial using the copy
         for (Map.Entry<Integer, Monomial> entry : mapQ.entrySet()) {
             Monomial aux = entry.getValue();
-            rez.addMonomial(aux);
+            rez.addMonomial(aux);                               // add aux from polynomial q's map to rez
         }
         return rez;
     }
 
-    public Polynomial sub(Polynomial p, Polynomial q) {
+    public Polynomial sub(Polynomial p, Polynomial q) {             // works the same as the function "add" but multiplies the values by -1
         HashMap<Integer, Monomial> mapP = new HashMap<>();
         mapP.putAll(p.getMonomials());
         HashMap<Integer, Monomial> mapQ = (HashMap<Integer, Monomial>) q.getMonomials();
@@ -83,14 +83,14 @@ public class Operations {
         HashMap<Integer, Monomial> tableQ = (HashMap<Integer, Monomial>) q.getMonomials();
         for (Map.Entry<Integer, Monomial> entry : tableP.entrySet()) {
             for (Map.Entry<Integer, Monomial> ent : tableQ.entrySet()) {
-                int degree = entry.getKey() + ent.getKey();
+                int degree = entry.getKey() + ent.getKey();             // degree = p.degree + q.degree
                 Monomial auxP = entry.getValue();
                 Monomial auxQ = ent.getValue();
-                double coef = auxP.getCoef() * auxQ.getCoef();
+                double coef = auxP.getCoef() * auxQ.getCoef();          // coef = p.coefficient + q.coefficient
                 Monomial mult = new Monomial();
                 mult.setCoef(coef);
                 mult.setDegree(degree);
-                rez.addMonomial(mult);
+                rez.addMonomial(mult);                                  // add monomial(degree,coef) to rez
             }
         }
         return rez;
@@ -102,13 +102,13 @@ public class Operations {
         tableP.put(0, null);
         for (Map.Entry<Integer, Monomial> entry : tableP.entrySet()) {
             if (entry.getKey() > 0) {
-                int degree = entry.getKey() - 1;
+                int degree = entry.getKey() - 1;                            // degree = p.degree - 1
                 Monomial aux = entry.getValue();
-                double coef = aux.getCoef() * entry.getKey();
+                double coef = aux.getCoef() * entry.getKey();               // coef = p.coef * p.degree
                 Monomial deriv = new Monomial();
                 deriv.setCoef(coef);
                 deriv.setDegree(degree);
-                rez.addMonomial(deriv);
+                rez.addMonomial(deriv);                                     // add monomial(degree,coef) to rez
             }
         }
         return rez;
@@ -118,13 +118,13 @@ public class Operations {
         Polynomial rez = new Polynomial();
         HashMap<Integer, Monomial> tableP = (HashMap<Integer, Monomial>) p.getMonomials();
         for (Map.Entry<Integer, Monomial> entry : tableP.entrySet()) {
-            int degree = entry.getKey() + 1;
+            int degree = entry.getKey() + 1;                                // degree = p.degree +1
             Monomial aux = entry.getValue();
-            double coef = aux.getCoef() / degree;
+            double coef = aux.getCoef() / degree;                           // coef = p.coef / degree
             Monomial deriv = new Monomial();
             deriv.setCoef(coef);
             deriv.setDegree(degree);
-            rez.addMonomial(deriv);
+            rez.addMonomial(deriv);                                         // add monomial(degree,coef) to rez
         }
         return rez;
     }

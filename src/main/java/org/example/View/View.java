@@ -66,7 +66,7 @@ public class View {
         result.setBounds(10, 180, 250, 25);
         panel.add(result);
 
-        panel.add(back);
+        //panel.add(back);
     }
 
 }

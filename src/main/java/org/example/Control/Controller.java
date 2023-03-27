@@ -35,7 +35,7 @@ public class Controller implements ActionListener {
                 Monomial monomial = op.extractData(it);
                 aux.addMonomial(monomial);
             }
-            polynomial1 = aux;
+            polynomial1 = aux;                      // extracts the first polynomial from the text field
 
             Polynomial aux2 = new Polynomial();
             String text2 = gui.poly2.getText();
@@ -44,7 +44,7 @@ public class Controller implements ActionListener {
                 Monomial monomial = op.extractData(it);
                 aux2.addMonomial(monomial);
             }
-            polynomial2 = aux2;
+            polynomial2 = aux2;                    // extracts the second polynomial from the text field
 
             if (gui.operations.getSelectedItem() == "Add") {
                 Polynomial add = op.add(polynomial1, polynomial2);
