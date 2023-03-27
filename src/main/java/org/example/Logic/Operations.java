@@ -151,9 +151,7 @@ public class Operations {
                     rez = rez + " + " + coef + "x^" + degree + " ";
                 else rez = rez + " " + coef + "x^" + degree + " ";
             } else if (entry.getKey() == 0) {
-                if (entry.getValue().getCoef() > 0)
-                    rez = rez + " " + coef;
-                else rez = rez + " " + coef;
+                rez = rez + " " + coef;
             } else {
                 if (entry.getValue().getCoef() > 0)
                     rez = rez + " + " + coef + "x";
