@@ -25,7 +25,7 @@ public class Polynomial {
 
     public void addMonomial(Monomial monomial) {
         int deg = monomial.getDegree();
-        if (monomials.containsKey(deg)) {                    // if the polynomial already contains a monomial of that degree it adds the coefficient of the existent one with the new one
+        if (monomials.containsKey(deg)) {                                               // if the polynomial already contains a monomial of that degree it adds the coefficient of the existent one with the new one
             Monomial auxMonomial = monomials.get(deg);
             auxMonomial.setCoef(auxMonomial.getCoef() + monomial.getCoef());            // ex: x^2 + 3x^2 in the same polynomial becomes => 4x^2
             monomials.put(deg, auxMonomial);
